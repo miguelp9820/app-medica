@@ -34,7 +34,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Earnings",
+      label: "Pacientes", // Cambiado de "Earnings" a "Pacientes"
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -46,7 +46,8 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      // Números reducidos para que parezcan pacientes reales en lugar de dólares
+      data: [0, 100, 50, 150, 100, 200, 150, 250, 200, 300, 250, 400],
     }],
   },
   options: {
@@ -76,9 +77,9 @@ var myLineChart = new Chart(ctx, {
         ticks: {
           maxTicksLimit: 5,
           padding: 10,
-          // Include a dollar sign in the ticks
+          // Eliminado el signo de dólar ($)
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return number_format(value);
           }
         },
         gridLines: {
@@ -110,7 +111,8 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          // Eliminado el signo de dólar ($) del cuadro flotante
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
         }
       }
     }
